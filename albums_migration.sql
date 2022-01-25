@@ -11,5 +11,8 @@ CREATE TABLE albums(
     PRIMARY KEY (id)
 );
 
+DESCRIBE albums;
+SHOW CREATE TABLE albums;
+
 
 
