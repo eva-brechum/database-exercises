@@ -1,6 +1,16 @@
 USE employees;
 
+-- 2Modify your first query to order by first name. The first result should be Irena Pelz and the last result should be Vidya Awdeh.
+SELECT  *
+FROM employees
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY first_name;
 
+# walthrough solution
+# SELECT  *
+# FROM employees
+# WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+# ORDER BY first_name, emp_no DESC;
 -- 3. Update the query to order by first name and then last name. The first result should now be Irena Acton and the last should be Vidya Zweizig.
 
 SELECT  first_name, last_name
@@ -20,6 +30,18 @@ SELECT *
 FROM employees
 WHERE last_name LIKE 'E%'
 ORDER BY emp_no ASC;
+
+-- 6. Now reverse the sort order for both queries and compare results.
+SELECT   last_name, first_name
+FROM employees
+WHERE first_name IN ('Irena', 'Vidya', 'Maya')
+ORDER BY last_name DESC, first_name DESC;
+
+SELECT *
+FROM employees
+WHERE last_name LIKE 'E%'
+ORDER BY emp_no DESC;
+
 
 SELECT last_name
 FROM employees
