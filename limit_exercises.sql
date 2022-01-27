@@ -12,10 +12,15 @@ LIMIT 10;
 
 -- 3.Create a query to get the top 5 salaries and display just the employees number from the salaries table. The employee number results should be:
 
-SELECT DISTINCT emp_no
-FROM employees
-WHERE emp_no
-ORDER BY emp_no BETWEEN 43624 AND 253939
+SELECT emp_no
+FROM employees.salaries
+ORDER BY salary DESC
 LIMIT 5;
 
 -- 4.Update the previous query to find the tenth page of results. The employee number results should be:
+
+SELECT *
+FROM employees
+ORDER BY emp_no
+LIMIT 5
+OFFSET 10;
