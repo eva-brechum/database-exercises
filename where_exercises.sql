@@ -6,6 +6,8 @@ SELECT  first_name
 FROM employees
 WHERE first_name IN ('Irena', 'Vidya', 'Maya');
 
+-- walkthrough solution
+# SELECT * FROM employees WHERE first_name IN ('Irena', 'Vidya', 'Maya');
 
 -- Find all employees whose last name starts with 'E' — 7,330 rows.
 SELECT last_name
@@ -24,6 +26,14 @@ WHERE first_name = 'Irena' OR
         first_name = 'Vidya' OR
             first_name= 'Maya'
         AND gender = 'male';
+
+-- Walkthrough solution for added clarification
+# SELECT *
+# FROM employees
+# WHERE gender = 'M'
+# AND (first_name = 'Irena'
+# #     OR first_name = 'Vidya'
+#     OR first_name = 'Maya');
 
 -- Find all employees whose last name starts or ends with 'E' -30723
 SELECT last_name
