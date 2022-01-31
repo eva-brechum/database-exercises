@@ -111,3 +111,30 @@ JOIN dept_emp de on T.emp_no = de.emp_no
 WHERE de.dept_no = 'd009' AND t.to_date > curdate()
 GROUP BY t.title;
 
+-- Find the current salary of all current managers.
+SELECT d.dept_name AS 'Department name',
+       CONCAT(e.first_name, ' ', e.last_name) AS 'Department manager',
+       s.salary AS Salary
+      FROM departments AS d
+JOIN dept_manager AS dm
+ON d.dept_no = dm.dept_no
+JOIN employees AS e ON dm.emp_no = e.emp_no
+JOIN salaries AS s ON e.emp_no = s.emp_no
+WHERE s.to_date > curdate() AND dm.to_date > curdate()
+ORDER BY d.dept_name;
+
+#  Bonus: Find the names of all current employees, their department name,
+# and their current manager's name .
+SELECT CONCAT (e.first_name, ' ', e.last_name) AS 'Employee Name',
+    d.dept_name AS 'Department name',
+       CONCAT(e.first_name, ' ', e.last_name) AS 'Department manager'
+FROM departments AS d
+         JOIN dept_manager AS dm
+              ON d.dept_no = dm.dept_no
+        JOIN dept_emp de on d.dept_no = de.dept_no
+         JOIN employees AS em ON em.emp_no = dm.emp_no
+         JOIN employees AS e ON e.emp_no = de.emp_no
+WHERE dm.to_date > curdate() AND de.to_date > curdate()
+ORDER BY d.dept_name;
+
+
