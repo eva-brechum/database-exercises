@@ -40,7 +40,7 @@ INSERT INTO users (name, email, role_id) VALUES
 -- Use JOIN, LEFT JOIN, and RIGHT JOIN to combine results
    -- from the users and roles tables as we did in the lesson
 
-SELECT CONCAT(u.name, ' ', u.email) AS  users,
+SELECT CONCAT(u.name, ' ', u.email) AS  user_name,
        CONCAT(r.name, ' ', r.name) AS roles
 FROM users AS u
 JOIN roles AS r ON u.role_id = r.id;
@@ -56,3 +56,8 @@ SELECT CONCAT(u.name, ' ', u.email) AS  users,
        CONCAT(r.name, ' ', r.name) AS role
 FROM users as u
          RIGHT JOIN roles r on u.role_id = r.id;
+
+SELECT roles.*, users.*
+FROM roles
+JOIN users
+ON roles.id = roles.id = users.role_id;
