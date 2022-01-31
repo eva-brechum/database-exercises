@@ -4,7 +4,7 @@ USE employees;
 -- Return 10 employees in a result set named 'full_name'
 -- in the format of 'last name, first name' for each employee.
 
-SELECT CONCAT(last_name, '', first_name) AS full_name
+SELECT CONCAT(last_name, ' ', first_name) AS full_name
 FROM employees
 GROUP BY full_name
 LIMIT 10;
@@ -16,7 +16,7 @@ GROUP BY birth_date
 LIMIT 10;
 -- Update the query to format full name to include the employee number so it is
 -- formatted as 'employee number - last name, first name'.
-SELECT CONCAT(emp_no, '', last_name, '', first_name) AS full_name, birth_date AS DOB
+SELECT CONCAT(emp_no, ' - ', last_name, ', ', first_name) AS full_name, birth_date AS DOB
 FROM employees
 GROUP BY emp_no
 LIMIT 10;
