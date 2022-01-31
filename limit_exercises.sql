@@ -1,6 +1,6 @@
 USE employees;
 
--- SELECT DISTINCT title FROM titles;
+SELECT DISTINCT title FROM titles;
 
 -- 2. List the first 10 distinct last name sorted in descending order. Your result should look like this:
 
