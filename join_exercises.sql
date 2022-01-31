@@ -61,3 +61,53 @@ SELECT roles.*, users.*
 FROM roles
 JOIN users
 ON roles.id = roles.id = users.role_id;
+
+
+USE employees;
+
+# write a query that shows each department along with the name
+# of the current manager for that department.
+
+SELECT * FROM dept_manager;
+SELECT * FROM departments;
+SELECT * FROM dept_emp;
+SELECT * FROM salaries;
+SELECT * FROM employees;
+SELECT * FROM titles;
+
+# SELECT CONCAT(e.first_name, '  ', e.last_name) AS full_name,
+#        d.dept_name
+# FROM employees AS e
+#     JOIN dept_emp AS de
+#     ON de.emp_no = e.emp_no
+#     JOIN departments AS d on de.dept_no = d.dept_no
+#     WHERE de.to_date ='1999-01-01' AND e.emp_no =10001;
+
+SELECT d.dept_name AS 'department name',
+       CONCAT(e.first_name, ' ', e.last_name) AS 'Department manager'
+FROM departments AS d
+JOIN dept_manager AS dm
+ON d.dept_no = dm.dept_no
+JOIN employees AS e
+ON e.emp_no = dm.emp_no
+WHERE dm.to_date > curdate()
+ORDER BY d.dept_name;
+
+-- Find the name of all departments currently managed by women.
+SELECT d.dept_name AS 'Department name',
+       CONCAT(e.first_name, ' ', e.last_name) AS 'Department manager'
+FROM departments AS d
+         JOIN dept_manager AS dm
+              ON d.dept_no = dm.dept_no
+         JOIN employees AS e
+              ON e.emp_no = dm.emp_no
+WHERE dm.to_date > curdate() AND e.gender = 'F'
+ORDER BY d.dept_name;
+
+-- Find the current titles of employees currently working in the Customer Service department.
+SELECT t.title AS title,
+       COUNT(*) AS Total FROM titles AS T
+JOIN dept_emp de on T.emp_no = de.emp_no
+WHERE de.dept_no = 'd009' AND t.to_date > curdate()
+GROUP BY t.title;
+
