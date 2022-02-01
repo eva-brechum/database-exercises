@@ -44,10 +44,22 @@ WHERE dept_no IN
     );
 
  -- BONUS 2. Find the first and last name of the employee with the highest salary.
- SELECT first_name, last_name
+ SELECT first_name, last_name, (SELECT max(salary) FROM salaries) AS Salary
  FROM employees
 WHERE emp_no IN (
     SELECT emp_no
     FROM salaries
-    WHERE salary
+    WHERE salary IN (
+        SELECT max(salary) from salaries
+        )
     );
+
+# Walkthrought
+SELECT first_name, last_name
+FROM employees
+WHERE emp_no IN (
+SELECT emp_no
+FROM salaries
+WHERE salary = (SELECT MAX(salary) FROM salaries)
+AND to_date > CURDATE()
+);
