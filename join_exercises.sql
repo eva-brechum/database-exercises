@@ -2,8 +2,8 @@ CREATE DATABASE IF NOT EXISTS join_test_db;
 
 USE join_test_db;
 
-SHOW CREATE DATABASE join_test_db;
-SHOW DATABASES;
+# SHOW CREATE DATABASE join_test_db;
+# SHOW DATABASES;
 
 CREATE TABLE roles (
                        id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -31,7 +31,9 @@ INSERT INTO users (name, email, role_id) VALUES
                                              ('sally', 'sally@example.com', 3),
                                              ('adam', 'adam@example.com', 3),
                                              ('jane', 'jane@example.com', null),
-                                             ('mike', 'mike@example.com', null),
+                                             ('mike', 'mike@example.com', null);
+
+ INSERT INTO users(name, email, role_id) VALUES
                                              ('megan', 'megan@example.com', 2),
                                              ('sam', 'sam@example.com', 2),
                                              ('star', 'star@example.com', 2),
@@ -40,27 +42,34 @@ INSERT INTO users (name, email, role_id) VALUES
 -- Use JOIN, LEFT JOIN, and RIGHT JOIN to combine results
    -- from the users and roles tables as we did in the lesson
 
-SELECT CONCAT(u.name, ' ', u.email) AS  user_name,
-       CONCAT(r.name, ' ', r.name) AS roles
-FROM users AS u
-JOIN roles AS r ON u.role_id = r.id;
+SELECT users.name AS  user_name,
+       roles.name AS role_name
+FROM users
+JOIN roles ON users.role_id = roles.id;
 
 # LEFT JOIN
-SELECT CONCAT(u.name, ' ', u.email) AS  users,
-       CONCAT(r.name, ' ', r.name) AS roles
+SELECT u.name AS  user_name,
+       roles.name AS role_name
 FROM users AS u
-         LEFT JOIN roles r on u.role_id = r.id;
+         LEFT JOIN roles on u.role_id = roles.id;
 
 # RIGHT JOIN
 SELECT CONCAT(u.name, ' ', u.email) AS  users,
-       CONCAT(r.name, ' ', r.name) AS role
+       CONCAT(roles.name) AS role
 FROM users as u
-         RIGHT JOIN roles r on u.role_id = r.id;
+         RIGHT JOIN roles on u.role_id = roles.id;
 
 SELECT roles.*, users.*
 FROM roles
 JOIN users
 ON roles.id = roles.id = users.role_id;
+
+-- Walkthrough Solution for additional clarification
+# SELECT roles.name AS 'Role', COUNT(u.role_id) AS 'Count'
+# FROM roles
+#     LEFT JOIN users u ON roles.id = u.role_id
+# GROUP BY roles.name;
+
 
 
 USE employees;
@@ -75,13 +84,6 @@ SELECT * FROM salaries;
 SELECT * FROM employees;
 SELECT * FROM titles;
 
-# SELECT CONCAT(e.first_name, '  ', e.last_name) AS full_name,
-#        d.dept_name
-# FROM employees AS e
-#     JOIN dept_emp AS de
-#     ON de.emp_no = e.emp_no
-#     JOIN departments AS d on de.dept_no = d.dept_no
-#     WHERE de.to_date ='1999-01-01' AND e.emp_no =10001;
 
 SELECT d.dept_name AS 'department name',
        CONCAT(e.first_name, ' ', e.last_name) AS 'Department manager'
