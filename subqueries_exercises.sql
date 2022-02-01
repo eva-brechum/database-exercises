@@ -13,10 +13,10 @@ WHERE hire_date =
 # Find all the titles held by all employees with the first name Aamod.
 # 314 total titles, 6 unique titles
 
-SELECT DISTINCT first_name
-FROM employees
-WHERE first_name =
-      (SELECT first_name
+SELECT title
+FROM titles
+WHERE emp_no IN
+      (SELECT emp_no
           FROM employees
           WHERE first_name = 'Aamod'
           );
