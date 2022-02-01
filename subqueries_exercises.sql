@@ -20,4 +20,21 @@ WHERE emp_no IN
           FROM employees
           WHERE first_name = 'Aamod'
           );
-# Needs work
+
+-- 3. Find all the current department managers that are female.
+SELECT first_name, last_name
+FROM employees
+WHERE emp_no IN
+    (SELECT emp_no
+        FROM dept_manager
+        WHERE to_date > curdate() AND employees.gender = 'F'
+    );
+
+-- Find all the department names that currently have female managers
+SELECT dept_name
+FROM departments
+WHERE dept_no IN
+      (SELECT dept_no
+          FROM dept_manager
+          WHERE to_date >curdate() AND emp_no
+    )
